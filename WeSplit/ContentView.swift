@@ -22,6 +22,7 @@ struct ContentView: View {
                 //MARK: DecimalPad with dot
                     .keyboardType(.decimalPad)
             }
+            //MARK: Section for check amount
             Section {
                 Text(checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
             }
