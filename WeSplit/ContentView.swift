@@ -30,6 +30,13 @@ struct ContentView: View {
                     }
                     .pickerStyle(.navigationLink)
                 }
+                Section {
+                    Picker("Tip percentage", selection: $tipPercentage) {
+                        ForEach(tipPercentages, id: \.self) {
+                            Text($0, format: .percent)
+                        }
+                    }
+                }
                 //MARK: Section for check amount
                 Section {
                     Text(checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
