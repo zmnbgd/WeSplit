@@ -14,6 +14,14 @@ struct ContentView: View {
     @State private var tipPercentage = 20
     @FocusState private var amountIsFocused: Bool
     
+    var finalChech: Double {
+        var people = Double(numberOfPeople + 2)
+        var tip = Double(tipPercentage)
+        var checkWithTip = checkAmount / 100 * tip
+        var checkTotal = checkAmount + checkWithTip
+    }
+    
+    
     let tipPercentages = [0, 10, 15, 20, 25]
     
     var totalPerPerson: Double {
@@ -45,6 +53,7 @@ struct ContentView: View {
                     }
                     .pickerStyle(.navigationLink)
                 }
+                
                 Section("How much do you want to tip?") {
                     Picker("Tip percentage", selection: $tipPercentage) {
                         ForEach(tipPercentages, id: \.self) {
@@ -53,8 +62,13 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                //MARK: Section for check amount
+                //MARK: Challenge - WeSplit - Add another section showing the total amount for the check – i.e., the original amount plus tip value, without dividing by the number of people.
                 Section {
+                    Text(finalChech, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                }
+                //MARK: Section for check amount
+                // MARK: Challenge - WeSplit - 1. Add a header to the third section, saying “Amount per person”
+                Section("Amount per person") {
                     Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
             }
