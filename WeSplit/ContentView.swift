@@ -15,17 +15,18 @@ struct ContentView: View {
     @FocusState private var amountIsFocused: Bool
     
     var finalChech: Double {
-        var people = Double(numberOfPeople + 2)
-        var tip = Double(tipPercentage)
-        var checkWithTip = checkAmount / 100 * tip
-        var checkTotal = checkAmount + checkWithTip
+        let people = Double(numberOfPeople + 2)
+        let tip = Double(tipPercentage)
+        let checkWithTip = checkAmount / 100 * tip
+        let checkTotal = checkAmount + checkWithTip
+        
+        return checkTotal
     }
-    
     
     let tipPercentages = [0, 10, 15, 20, 25]
     
     var totalPerPerson: Double {
-        //Calsulate total per person here
+        //Calcilate total per person here
         let peopleConut = Double(numberOfPeople + 2)
         let tipSelection = Double(tipPercentage)
         
@@ -37,7 +38,6 @@ struct ContentView: View {
         return amountPerPerson
     }
     
-    
     var body: some View {
         NavigationStack {
             Form {
@@ -46,23 +46,25 @@ struct ContentView: View {
                     //MARK: DecimalPad with dot
                         .keyboardType(.decimalPad)
                     
-                    Picker("number of People", selection: $numberOfPeople) {
+                    Picker("Number of People", selection: $numberOfPeople) {
                         ForEach(2..<100) {
                             Text("\($0)")
                         }
                     }
                     .pickerStyle(.navigationLink)
                 }
-                
+                //MARK: Challenge - WeSplit - 3. Change the tip percentage picker to show a new screen rather than using a segmented control, and give it a wider range of options – everything from 0% to 100%. Tip: use the range 0..<101 for your range rather than a fixed array.
                 Section("How much do you want to tip?") {
                     Picker("Tip percentage", selection: $tipPercentage) {
-                        ForEach(tipPercentages, id: \.self) {
+                        //                        ForEach(tipPercentages, id: \.self)
+                        ForEach(0..<100) {
                             Text($0, format: .percent)
                         }
                     }
-                    .pickerStyle(.segmented)
+                    //.pickerStyle(.segmented)
+                    .pickerStyle(.navigationLink)
                 }
-                //MARK: Challenge - WeSplit - Add another section showing the total amount for the check – i.e., the original amount plus tip value, without dividing by the number of people.
+                //MARK: Challenge - WeSplit - 2. Add another section showing the total amount for the check – i.e., the original amount plus tip value, without dividing by the number of people.
                 Section {
                     Text(finalChech, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
