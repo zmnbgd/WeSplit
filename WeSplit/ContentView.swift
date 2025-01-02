@@ -67,6 +67,8 @@ struct ContentView: View {
                 //MARK: Challenge - WeSplit - 2. Add another section showing the total amount for the check – i.e., the original amount plus tip value, without dividing by the number of people.
                 Section {
                     Text(finalChech, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    //MARK: Challenge - Project 3. - 1. Go back to project 1 and use a conditional modifier to change the total amount text view to red if the user selects a 0% tip. 
+                        .foregroundColor(tipPercentage == 0 ? .red : .black)
                 }
                 //MARK: Section for check amount
                 // MARK: Challenge - WeSplit - 1. Add a header to the third section, saying “Amount per person”
